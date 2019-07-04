@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/03 18:22:59 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:47:29 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct	s_target
 	bool	rb_toggle;
 	u_int	rrb;
 	bool	rrb_toggle;
+	u_int	rr;
+	bool	rr_toggle;
+	u_int	rrr;
+	u_int	rrr_toggle;
 	u_int	index;
 	int		value;
 	u_int	instr;
