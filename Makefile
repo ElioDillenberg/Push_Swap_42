@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/04 16:19:14 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/04 17:29:44 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ CC = gcc
 LIBFT = libft/libft.a
 EXECS = checker push_swap
 
-SRC = $(addsuffix .c, checker push_swap quick_sort get_min_algo tools tools2)
+SRC = $(addsuffix .c, checker push_swap algo quick_sort get_min_algo tools \
+	  tools2)
 
 OBJ = $(SRC:.c=.o)
 OBJCHECKER = $(addsuffix .o, checker tools tools2)
-OBJPUSHSWAP = $(addsuffix .o, push_swap quick_sort get_min_algo tools tools2)
+OBJPUSHSWAP = $(addsuffix .o, push_swap algo quick_sort get_min_algo \
+			  tools tools2)
 
 GREEN = \033[01;32m
 BLUE = \033[01;34m

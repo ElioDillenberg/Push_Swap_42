@@ -6,12 +6,14 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/04 14:47:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/04 17:43:43 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# include <stdbool.h>
 
 # define u_int	unsigned int
 
@@ -49,6 +51,8 @@ int		check_integers(int argc, char **argv);
 int		check_arr(int *a, u_int top_a, u_int top_b);
 int		run_algo(int *a, u_int *top_a, int *b, u_int *top_b);
 int		check_array(int *a, u_int *top_a, u_int *top_b);
+
+int		algo(int *a, int *b, u_int *top);
 
 void	get_min_algo(int *a, int *b, u_int *top);
 

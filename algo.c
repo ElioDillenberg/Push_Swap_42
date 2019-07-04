@@ -6,9 +6,13 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/04 16:19:06 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/04 18:39:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include "libft/libft.h"
+#include "push_swap.h"
 
 /*
 ** This function identifies the card to move to the top within B can be
@@ -19,27 +23,21 @@ u_int	get_move_b(int move_a, int *b, u_int *top)
 {
 	u_int	max;
 	u_int	under;
-	int		i_under;
 	u_int	i;
 	u_int	min;
 
 	max = 0;
 	min = 0;
 	under = 0;
-	i_under = -2147483648;
 	i = 0;
-	while (i < top[1] - 1)
+	while (++i < top[1])
 	{
 		if (b[i] > b[max])
 			max = i;
 		if (b[i] < b[min])
 			min = i;
-		if (b[i] < move_a && b[i] > i_under)
-		{
-			i_under = b[i]
+		if (b[i] < move_a && b[i] > b[under])
 			under = i;
-		}
-		i++;
 	}
 	if (move_a > b[max] || move_a < b[min])
 		return (max);
@@ -57,7 +55,7 @@ void	get_rot(u_int *top, u_int move_a, u_int move_b, t_target *cr)
 	cr->ra = top[0] - move_a;
 	cr->rra = move_a + 1;
 	cr->rb = top[1] - move_b;
-	cr->rb = move_b + 1;
+	cr->rrb = move_b + 1;
 }
 
 /*
@@ -116,10 +114,11 @@ void	cpy_stru(t_target *src, t_target *dst)
 
 void	switch_toggles(t_target *cr, u_int i)
 {
-	reset_toggles(cr, 1);
+	rst_stru(cr, 1);
 	if (i == 0)
 		//ra + rb
 	{
+//		ft_printf("ra + rb\n");
 		if (cr->ra > cr->rb)
 		{
 			cr->rr = cr->rb;
@@ -143,6 +142,7 @@ void	switch_toggles(t_target *cr, u_int i)
 	else if (i == 1)
 		// rra + rrb
 	{
+//		ft_printf("rra + rrb\n");
 		if (cr->rra > cr->rrb)
 		{
 			cr->rrr = cr->rrb;
@@ -166,12 +166,14 @@ void	switch_toggles(t_target *cr, u_int i)
 	else if (i == 2)
 		// ra + rrb
 	{
+//		ft_printf("ra + rrb\n");
 		cr->ra_toggle = true;
 		cr->rrb_toggle = true;
 	}
 	else
 		// rra + rb
 	{
+//		ft_printf("rra + rb\n");
 		cr->rra_toggle = true;
 		cr->rb_toggle = true;
 	}
@@ -208,7 +210,7 @@ void	get_instr(t_target *cr)
 ** on the standard output as they are being executed
 */
 
-void	exe_instr(int *a, int *b, int *top, t_target *final)
+void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 {
 	if (final->ra_toggle == true)
 	{
@@ -228,25 +230,25 @@ void	exe_instr(int *a, int *b, int *top, t_target *final)
 			(final->rb)--;
 		}
 	}
-	if (final->rra == true)
+	if (final->rra_toggle == true)
 	{
-		while (final->rra_toggle > 0)
+		while (final->rra > 0)
 		{
 			ft_putstr("rra\n");
 			rev_rotate_a_b(a, top[0]);
 			(final->rra)--;
 		}
 	}
-	if (final->rrb == true)
+	if (final->rrb_toggle == true)
 	{
-		while (final->rrb_toggle > 0)
+		while (final->rrb > 0)
 		{
 			ft_putstr("rrb\n");
 			rev_rotate_a_b(b, top[1]);
 			(final->rrb)--;
 		}
 	}
-	if (final->rr == true)
+	if (final->rr_toggle == true)
 	{
 		while (final->rr_toggle > 0)
 		{
@@ -265,33 +267,68 @@ void	exe_instr(int *a, int *b, int *top, t_target *final)
 		}
 	}
 	ft_putstr("pb\n");
-	push_a_b(a, top[0], b, top[1]);
+	push_a_b(a, &(top[0]), b, &(top[1]));
+}
+
+/*
+** This function will rotate pb the necessary number of times to get the max
+** value on top of the stack in order to be able to push all cards back to a
+*/
+
+void	rotate_b_max(int *b, u_int *top)
+{
+	u_int	i;
+	u_int	max;
+
+	i = 0;
+	max = 0;
+	while (++i < top[1])
+	{
+		if (b[i] > b[max])
+			max = i;
+	}
+	i = 0;
+	if (top[1] - max < max + 1)
+		while (i++ < top[1] - max)
+			ft_putstr("rb\n");
+	else
+		while (i++ < max + 1)
+			ft_putstr("rrb\n");
 }
 
 /*
 ** Algo principal
 */
 
-void	algo(int *a, int *b, int *top)
+int		algo(int *a, int *b, u_int *top)
 {
 	t_target	*cr;
 	t_target	*final;
 	u_int		move_a;
 	u_int		move_b;
 
-	rst_stru(cr, 0);
-	rst_stru(final, 0);
+	if (!(cr = (t_target*)malloc(sizeof(t_target))))
+		return (-1);
+	if (!(final = (t_target*)malloc(sizeof(t_target))))
+	{
+		ft_memdel((void**)&cr);
+		return (-1);
+	}
 	// pushing the first two, this can be optimized easily by handling piles of
 	// 1 / 2 / 3 first, and then calling this algorithm
 	ft_putstr("pb\n");
-	push_a_b(a, top[0], b, top[1]);
+	push_a_b(a, &(top[0]), b, &(top[1]));
 	ft_putstr("pb\n");
-	push_a_b(a, top[0], b, top[1]);
+	push_a_b(a, &(top[0]), b, &(top[1]));
 	while (top[0] > 0)
 	{
+	rst_stru(final, 0);
 		move_a = 0;
 		while (move_a < top[0])
 		{
+	//		ft_printf("Testing : %d\n", a[move_a]);
+			rst_stru(cr, 0);
+			cr->value = a[move_a];
 			move_b = get_move_b(a[move_a], b, top);
 			get_rot(top, move_a, move_b, cr);
 			get_instr(cr);
@@ -299,12 +336,16 @@ void	algo(int *a, int *b, int *top)
 				cpy_stru(cr, final);
 			move_a++;
 		}
+//		ft_printf("chose to push %d\n", final->value);
 		exe_instr(a, b, top, final);
 	}
-	// here I need to rotate my B pile until it the highest value card is on top
+	rotate_b_max(b, top);
 	while (top[1] > 0)
 	{
 		ft_putstr("pa\n");
-		push_a_b(b, top[1], a, top[0]);
+		top[1]--;
 	}
+	ft_memdel((void**)&cr);
+	ft_memdel((void**)&final);
+	return (0);
 }
