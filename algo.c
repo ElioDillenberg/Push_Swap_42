@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/03 21:24:16 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/04 14:41:46 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ void	rst_stru(t_target *stru)
 	stru->rb_toggle = false;
 	stru->rrb = 0;
 	stru->rrb_toggle = false;
+	stru->rr = 0;
+	stru->rr_toggle = false;
+	stru->rrr = 0;
+	stru->rrr_toggle = false;
 	stru->index = 0;
 	stru->value = 0;
 	stru->instr = 4294967295;
@@ -93,9 +97,25 @@ void	cpy_stru(t_target *src, t_target *dst)
 	dst->rra_toggle = src->rra_toggle;
 	dst->rrb = src->rrb;
 	dst->rrb_toggle = src->rrb_toggle;
+	dst->rr = src->rr;
+	dst->rr_toggle = src->rr_toggle;
+	dst->rrr = src->rrr;
+	dst->rrr_toggle = src->rrr_toggle;
 	dst->index = src->index;
 	dst->value = src->value;
 	dst->instr = src->instr;
+}
+
+
+/*
+** This function will a toggle the right instructions in the structure based on
+** the input index (which corresponds to the right combination of instructions)
+*/
+
+void	switch_toggles(t_target *trying, u_int i)
+{
+	if (i = 0)
+		//ra + rb --> rr
 }
 
 /*
@@ -105,8 +125,26 @@ void	cpy_stru(t_target *src, t_target *dst)
 
 void	get_instr(t_target *trying)
 {
-	trying->instr = trying->ra > trying->rb ? trying->ra : trying->rb;
-	if (trying->)
+	u_int	tab[4];
+	u_int	i;
+
+	i = 0;
+	tab[0] = trying->ra > trying->rb ? trying->ra : trying->rb;
+	tab[1] = trying->rra > trying->rrb ? trying->rra : trying->rrb;
+	tab[2] = trying->ra + trying->rrb;
+	tab[3] = trying->rra + trying->rb;
+	trying->instr = tab[0];
+	while (++i < 4)
+		if (tab[i] > trying->instr)
+		{
+			trying->instr = tab[i];
+			switch_toggles(trying, i);
+		}
+		else if (tab[i] == trying->instr)
+		{
+			check_best_option;
+		}
+
 }
 
 /*
