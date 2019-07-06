@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 15:21:07 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/04 17:44:19 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/06 16:03:36 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	top[1] = 0;
 	if (!(a = (int*)malloc(sizeof(int) * top[0])))
 		return (-1);
-	if (!(b = (int*)malloc(sizeof(int) * top[1])))
+	if (!(b = (int*)malloc(sizeof(int) * top[0])))
 		return (-1);
 	while (--top[0] > 0)
 		a[top[1]++] = ft_atoi(argv[top[0] + 1]);
