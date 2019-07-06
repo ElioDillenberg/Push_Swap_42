@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:19:28 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/01 17:13:06 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/06 17:11:48 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int		check_doubles(int *a, u_int top_a)
 		j = i;
 		while (++j < top_a)
 			if (a[j] == a[i])
+			{
+				ft_printf("PROBLEM DOUBLES\n");
 				return (-1);
+			}
 	}
 	return (0);
 }

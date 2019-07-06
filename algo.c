@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/06 16:03:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/06 17:09:03 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,8 @@ void	rotate_b_max(int *b, u_int *top)
 {
 	u_int	i;
 	u_int	max;
+	u_int	rot;
+	u_int	rev_rot;
 
 	i = top[1];
 	max = 0;
@@ -307,19 +309,19 @@ void	rotate_b_max(int *b, u_int *top)
 		if (b[i] > b[max])
 			max = i;
 	}
-	//ft_printf("max_value = %d\n", b[max]);
-	i = top[1];
-	if (top[1] - max < max + 1)
-		while (--i > top[1] - max)
+	rot = top[0] - max - 1;
+	rev_rot = max + 1;
+	if (rot <= rev_rot)
+		while (rot-- > 0)
 		{
 			ft_putstr("rb\n");
 			rotate_a_b(b, top[1]);
 		}
 	else
-		while (--i > max + 1)
+		while (rev_rot-- > 0)
 		{
 			ft_putstr("rrb\n");
-			rotate_a_b(b, top[1]);
+			rev_rotate_a_b(b, top[1]);
 		}
 }
 
@@ -378,14 +380,14 @@ int		algo(int *a, int *b, u_int *top)
 		push_a_b(b, &(top[1]), a, &(top[0]));
 	}
 		i = 0;
-		ft_printf("This is a :\n");
-		while (i < top[0])
-		ft_printf("%d |", a[i++]);
-		i = 0;
-		ft_printf("\nThis is b :\n");
-		while (i < top[1])
-		ft_printf("%d |", b[i++]);
-		ft_printf("\n");
+//		ft_printf("This is a :\n");
+//		while (i < top[0])
+//		ft_printf("%d |", a[i++]);
+//		i = 0;
+//		ft_printf("\nThis is b :\n");
+//		while (i < top[1])
+//		ft_printf("%d |", b[i++]);
+//		ft_printf("\n");
 	ft_memdel((void**)&cr);
 	ft_memdel((void**)&final);
 	return (0);
