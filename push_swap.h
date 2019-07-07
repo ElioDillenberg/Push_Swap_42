@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/05 16:36:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/07 17:12:54 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,5 @@ void	get_min_algo(int *a, int *b, u_int *top);
 
 u_int	quick_sort(int *a, u_int p, u_int j, u_int *top);
 
+u_int	build_arrays(int argc, char **argv, int *a, int *b);
 #endif

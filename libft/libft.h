@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:39:30 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/20 16:21:29 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/07 14:59:37 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void			ft_swap(int	*a, int *b);
 ULL				ft_po(ULL nb, int po);
 int				ft_sqrt(int nb);
 int				ft_printf(const char *fmt, ...);
+char			**ft_split_whitespaces(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/06 17:09:03 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/07 15:41:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ u_int	get_move_b(int move_a, int *b, u_int *top)
 void	get_rot(u_int *top, u_int move_a, u_int move_b, t_target *cr)
 {
 	cr->ra = top[0] - move_a - 1;
-//	ft_printf("cr->ra = %u\n", cr->ra);
 	cr->rra = move_a + 1;
-//	ft_printf("cr->rra = %u\n", cr->rra);
 	cr->rb = top[1] - move_b - 1;
-//	ft_printf("cr->rb = %u\n", cr->rb);
 	cr->rrb = move_b + 1;
-//	ft_printf("cr->rrb = %u\n", cr->rrb);
 }
 
 /*
@@ -126,9 +122,7 @@ void	switch_toggles(t_target *cr, u_int i)
 {
 	rst_stru(cr, 1);
 	if (i == 0)
-		//ra + rb
 	{
-//		ft_printf("ra + rb\n");
 		if (cr->ra > cr->rb)
 		{
 			cr->rr = cr->rb;
@@ -150,9 +144,7 @@ void	switch_toggles(t_target *cr, u_int i)
 		}
 	}
 	else if (i == 1)
-		// rra + rrb
 	{
-//		ft_printf("rra + rrb\n");
 		if (cr->rra > cr->rrb)
 		{
 			cr->rrr = cr->rrb;
@@ -174,16 +166,12 @@ void	switch_toggles(t_target *cr, u_int i)
 		}
 	}
 	else if (i == 2)
-		// ra + rrb
 	{
-//		ft_printf("ra + rrb\n");
 		cr->ra_toggle = true;
 		cr->rrb_toggle = true;
 	}
 	else
-		// rra + rb
 	{
-//		ft_printf("rra + rb\n");
 		cr->rra_toggle = true;
 		cr->rb_toggle = true;
 	}
@@ -201,13 +189,9 @@ void	get_instr(t_target *cr)
 
 	i = 0;
 	tab[0] = cr->ra > cr->rb ? cr->ra : cr->rb;
-//	ft_printf("ra + rb -> total of instr = %u\n", tab[0]);
 	tab[1] = cr->rra > cr->rrb ? cr->rra : cr->rrb;
-//	ft_printf("rra + rrb -> total of instr = %u\n", tab[1]);
 	tab[2] = cr->ra + cr->rrb;
-//	ft_printf("ra + rrb -> total of instr = %u\n", tab[2]);
 	tab[3] = cr->rra + cr->rb;
-//	ft_printf("rra + rb -> total of instr = %u\n", tab[3]);
 	cr->instr = tab[0];
 	switch_toggles(cr, 0);
 	while (++i < 4)
@@ -228,7 +212,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 {
 	if (final->ra_toggle == true)
 	{
-//		ft_printf("nb of ra = %u\n", final->ra);
 		while (final->ra > 0)
 		{
 			ft_putstr("ra\n");
@@ -238,7 +221,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 	}
 	if (final->rb_toggle == true)
 	{
-//		ft_printf("nb of rb = %u\n", final->rb);
 		while (final->rb > 0)
 		{
 			ft_putstr("rb\n");
@@ -248,7 +230,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 	}
 	if (final->rra_toggle == true)
 	{
-//		ft_printf("nb of rra = %u\n", final->rra);
 		while (final->rra > 0)
 		{
 			ft_putstr("rra\n");
@@ -258,7 +239,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 	}
 	if (final->rrb_toggle == true)
 	{
-//		ft_printf("nb of rrb = %u\n", final->rrb);
 		while (final->rrb > 0)
 		{
 			ft_putstr("rrb\n");
@@ -268,7 +248,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 	}
 	if (final->rr_toggle == true)
 	{
-//		ft_printf("nb of rr = %u\n", final->rr);
 		while (final->rr > 0)
 		{
 			ft_putstr("rr\n");
@@ -278,7 +257,6 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 	}
 	if (final->rrr_toggle == true)
 	{
-//		ft_printf("nb of rrr = %u\n", final->rrr);
 		while (final->rrr > 0)
 		{
 			ft_putstr("rrr\n");
@@ -331,19 +309,11 @@ void	rotate_b_max(int *b, u_int *top)
 
 int		algo(int *a, int *b, u_int *top)
 {
-	t_target	*cr;
-	t_target	*final;
+	t_target	cr;
+	t_target	final;
 	u_int		move_a;
 	u_int		move_b;
-	u_int		i;
 
-	if (!(cr = (t_target*)malloc(sizeof(t_target))))
-		return (-1);
-	if (!(final = (t_target*)malloc(sizeof(t_target))))
-	{
-		ft_memdel((void**)&cr);
-		return (-1);
-	}
 	// pushing the first two, this can be optimized easily by handling piles of
 	// 1 / 2 / 3 first, and then calling this algorithm
 	ft_putstr("pb\n");
@@ -352,43 +322,25 @@ int		algo(int *a, int *b, u_int *top)
 	push_a_b(a, &(top[0]), b, &(top[1]));
 	while (top[0] > 0)
 	{
-	rst_stru(final, 0);
+		rst_stru(&final, 0);
 		move_a = 0;
 		while (move_a < top[0])
 		{
-//		ft_printf("Testing : %d, which is on index %u\n", a[move_a], move_a);
-			cr->value = a[move_a];
+			cr.value = a[move_a];
 			move_b = get_move_b(a[move_a], b, top);
-	//		ft_printf("Need to move the following to the top : %d (index = %u)\n", b[move_b], move_b);
-			get_rot(top, move_a, move_b, cr);
-			get_instr(cr);
-			if (cr->instr < final->instr)
-			{
-				cpy_stru(cr, final);
-		//		ft_printf("nb of instructions after change = %u\n", final->instr);
-			}
+			get_rot(top, move_a, move_b, &cr);
+			get_instr(&cr);
+			if (cr.instr < final.instr)
+				cpy_stru(&cr, &final);
 			move_a++;
 		}
-//		ft_printf("chose to push %d\n", final->value);
-//		ft_printf("Number of instructions = %u\n", final->instr);
-		exe_instr(a, b, top, final);
+		exe_instr(a, b, top, &final);
 	}
 	rotate_b_max(b, top);
 	while (top[1] > 0)
 	{
 		ft_putstr("pa\n");
-		push_a_b(b, &(top[1]), a, &(top[0]));
+		top[1]--;
 	}
-		i = 0;
-//		ft_printf("This is a :\n");
-//		while (i < top[0])
-//		ft_printf("%d |", a[i++]);
-//		i = 0;
-//		ft_printf("\nThis is b :\n");
-//		while (i < top[1])
-//		ft_printf("%d |", b[i++]);
-//		ft_printf("\n");
-	ft_memdel((void**)&cr);
-	ft_memdel((void**)&final);
 	return (0);
 }
