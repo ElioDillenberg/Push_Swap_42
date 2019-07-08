@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 11:33:38 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:58:28 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,52 @@ void	rotate_b_max(int *b, size_t *top)
 		}
 }
 
+
+/*
+** This function has to get me the top 3 values within my table and place them
+** inside the top_3 tab
+*/
+
+void	get_top_3(int *a, size_t *top, int *top_3)
+{
+	size_t	i;
+
+	i = 0;
+	top_3[0] = -2147483648;
+	top_3[1] = -2147384638;
+	top_3[2] = -2147483648;
+	while (i < top[0])
+	{
+		if (a[i] > top_3[0])
+			top_3[0] = a[i];
+		else if (a[i] > top_3[1])
+			top_3[1] = a[i];
+		else if (a[i] > top_3[2])
+			top_3[2] = a[i];
+		i++;
+	}
+}
+
+void	push_first_two(int *a, int *b, size_t *top, int *top_3)
+{
+	size_t  i;
+	size_t	push_counter;
+
+	i = 0;
+	push_counter = 0;
+
+	while (i < top[0] && push_counter < 2)
+	{
+		if (a[i] < top_3[2])
+		{
+			ft_putstr("pa\n");
+			push_a_b(a, &(top[0]), b, &(top[1]));
+			push_counter++;
+		}
+		i++;
+	}
+}
+
 /*
 ** Algo principal
 */
@@ -313,9 +359,10 @@ int		algo(int *a, int *b, size_t *top)
 	t_target	final;
 	size_t		move_a;
 	size_t		move_b;
+	int			top_3[3];
 
-	// pushing the first two, this can be optimized easily by handling piles of
-	// 1 / 2 / 3 first, and then calling this algorithm
+	get_top_3(a, top, top_3);
+	push_first_two(a, b, top, top_3);
 	ft_putstr("pb\n");
 	push_a_b(a, &(top[0]), b, &(top[1]));
 	ft_putstr("pb\n");

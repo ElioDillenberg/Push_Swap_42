@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 11:42:54 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:14:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,7 @@ int		algo(int *a, int *b, size_t *top);
 void	get_min_algo(int *a, int *b, size_t *top);
 
 size_t	quick_sort(int *a, size_t p, size_t j, size_t *top);
+
+void	sort_three(int *a);
+void	less_than_four(int *a, size_t *top);
 #endif

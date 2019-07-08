@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 15:21:07 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 12:15:58 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:58:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int		main(int argc, char **argv)
 		ft_memdel((void**)&b);
 		return ((int)write(2, "Error\n", 6));
 	}
-//	if (top[0] > 2)
+	if (top[0] > 3)
 		algo(a, b, top);
-//	else
-//		less_than_four(a, b, top);
+	else
+		less_than_four(a, top);
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);
 	return (0);
