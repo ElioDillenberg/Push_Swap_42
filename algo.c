@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 17:58:28 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:27:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,27 +363,33 @@ int		algo(int *a, int *b, size_t *top)
 
 	get_top_3(a, top, top_3);
 	push_first_two(a, b, top, top_3);
+	/*
 	ft_putstr("pb\n");
 	push_a_b(a, &(top[0]), b, &(top[1]));
 	ft_putstr("pb\n");
 	push_a_b(a, &(top[0]), b, &(top[1]));
-	while (top[0] > 0)
+	*/
+	while (top[0] > 2)
 	{
 		rst_stru(&final, 0);
 		move_a = 0;
 		while (move_a < top[0])
 		{
-			cr.value = a[move_a];
-			move_b = get_move_b(a[move_a], b, top);
-			get_rot(top, move_a, move_b, &cr);
-			get_instr(&cr);
-			if (cr.instr < final.instr)
-				cpy_stru(&cr, &final);
+			if (a[move_a] < top_3[2])
+			{
+				cr.value = a[move_a];
+				move_b = get_move_b(a[move_a], b, top);
+				get_rot(top, move_a, move_b, &cr);
+				get_instr(&cr);
+				if (cr.instr < final.instr)
+					cpy_stru(&cr, &final);
+			}
 			move_a++;
 		}
 		exe_instr(a, b, top, &final);
 	}
 	rotate_b_max(b, top);
+	sort_three(a);
 	while (top[1] > 0)
 	{
 		ft_putstr("pa\n");

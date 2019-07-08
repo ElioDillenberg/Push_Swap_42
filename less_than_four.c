@@ -6,28 +6,16 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:06:21 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 17:28:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:27:33 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	sort_six(int *a, int *b, size_t *top)
-{
-	int		top_3[3];
-	size_t	i;
-	int		i_value;
-
-	top_3[0] = -2147483648;
-	top_3[1] = -2147483648;
-	top_3[2] = -2147483648;
-	i = 0;
-	while (i < top[0])
-	{
-		if (top[i])
-	}
-}
+/*
+** This function sorts a, when a only contains 3 elements
+*/
 
 void	sort_three(int *a)
 {
@@ -55,7 +43,7 @@ void	sort_three(int *a)
 	}
 }
 
-void	less_than_four(int *a, int *b, size_t *top)
+void	less_than_four(int *a, size_t *top)
 {
 	if (top[0] == 2)
 	{
@@ -64,6 +52,4 @@ void	less_than_four(int *a, int *b, size_t *top)
 	}
 	else if (top[0] == 3)
 		sort_three(a);
-	else if (top[0] > 3)
-		sort_siz(a, top);
 }
