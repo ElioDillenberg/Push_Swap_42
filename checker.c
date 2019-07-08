@@ -6,17 +6,18 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/06 17:15:53 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:27:01 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 #include <stdlib.h>
+#include <unistd.h>
 
-int		check_arr(int *a, u_int top_a, u_int top_b)
+int		check_arr(int *a, size_t top_a, size_t top_b)
 {
-	u_int	i;
+	size_t	i;
 
 	if (top_b != 0)
 		return (-1);
@@ -30,7 +31,7 @@ int		check_arr(int *a, u_int top_a, u_int top_b)
 	return (0);
 }
 
-int		run_algo(int *a, u_int *top_a, int *b, u_int *top_b)
+int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
 {
 	char	*command;
 	int		ret;
@@ -72,11 +73,11 @@ int		main(int argc, char **argv)
 {
 	int		*a;
 	int		*b;
-	u_int	top_a;
-	u_int	top_b;
+	size_t	top_a;
+	size_t	top_b;
 
 	if (argc == 1 || check_integers(argc, argv) == -1)
-		return (ft_printf("Error\n"));
+		return ((int)write(2, "Error\n", 6));
 	top_a = argc - 1;
 	top_b = 0;
 	if (!(a = (int*)malloc(sizeof(int) * top_a)))
@@ -90,7 +91,7 @@ int		main(int argc, char **argv)
 	top_b = 0;
 	if (check_doubles(a, top_a) == -1 || run_algo(a, &top_a, b, &top_b) == -1)
 		return (ft_printf("Error\n"));
-	check_arr(a, top_a, top_b) == -1 ? ft_printf("KO\n") : ft_printf("OK\n");
+	check_arr(a, top_a, top_b) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);
 	return (0);

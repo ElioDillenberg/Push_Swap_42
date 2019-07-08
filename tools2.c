@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:19:28 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/06 17:11:48 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:46:27 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 ** Added function needed to check input in both push_swap and checker
 */
 
-int		rev_rotate_a_b(int *a_b, u_int top)
+int		rev_rotate_a_b(int *a_b, size_t top)
 {
-	u_int	x;
+	size_t	x;
 	int		temp;
 
 	if (top < 2)
@@ -37,17 +37,17 @@ int		rev_rotate_a_b(int *a_b, u_int top)
 	return (0);
 }
 
-int		rev_rotate_both(int *a, u_int top_a, int *b, u_int top_b)
+int		rev_rotate_both(int *a, size_t top_a, int *b, size_t top_b)
 {
 	rev_rotate_a_b(a, top_a);
 	rev_rotate_a_b(b, top_b);
 	return (0);
 }
 
-int		check_doubles(int *a, u_int top_a)
+int		check_doubles(int *a, size_t top_a)
 {
-	u_int	i;
-	u_int	j;
+	size_t	i;
+	size_t	j;
 
 	i = -1;
 	j = 0;
@@ -56,10 +56,7 @@ int		check_doubles(int *a, u_int top_a)
 		j = i;
 		while (++j < top_a)
 			if (a[j] == a[i])
-			{
-				ft_printf("PROBLEM DOUBLES\n");
 				return (-1);
-			}
 	}
 	return (0);
 }

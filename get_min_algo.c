@@ -6,17 +6,17 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 13:48:39 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/02 18:52:00 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:43:47 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static u_int	get_min(int *a, u_int top_a)
+static size_t	get_min(int *a, size_t top_a)
 {
-	u_int	x;
-	u_int	res;
+	size_t	x;
+	size_t	res;
 	int		res_value;
 
 	x = 0;
@@ -34,7 +34,7 @@ static u_int	get_min(int *a, u_int top_a)
 	return (res);
 }
 
-static void	rr_nd_push(int *a, int *b, u_int *top, u_int iterations)
+static void	rr_nd_push(int *a, int *b, size_t *top, size_t iterations)
 {
 	while (iterations > 0)
 	{
@@ -46,7 +46,7 @@ static void	rr_nd_push(int *a, int *b, u_int *top, u_int iterations)
 	push_a_b(a, &(top[0]), b, &(top[1]));
 }
 
-static void	r_nd_push(int *a, int *b, u_int *top, u_int iterations)
+static void	r_nd_push(int *a, int *b, size_t *top, size_t iterations)
 {
 	while (iterations > 0)
 	{
@@ -58,9 +58,9 @@ static void	r_nd_push(int *a, int *b, u_int *top, u_int iterations)
 	push_a_b(a, &(top[0]), b, &(top[1]));
 }
 
-void	get_min_algo(int *a, int *b, u_int *top)
+void	get_min_algo(int *a, int *b, size_t *top)
 {
-	u_int	min_index;
+	size_t	min_index;
 	int		min;
 
 	while (top[0] > 0)

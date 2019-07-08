@@ -6,18 +6,18 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 13:54:51 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/02 14:09:11 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:44:20 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static void	swapy(u_int i_p, u_int j, u_int top_a, u_int top_b)
+static void	swapy(size_t i_p, size_t j, size_t top_a, size_t top_b)
 {
-	u_int	i_p_counter;
-	u_int	j_counter;
-	u_int	x;
+	size_t	i_p_counter;
+	size_t	j_counter;
+	size_t	x;
 
 	i_p_counter = 0;
 	j_counter = 0;
@@ -62,10 +62,10 @@ static void	swapy(u_int i_p, u_int j, u_int top_a, u_int top_b)
 	}
 }
 
-u_int	quick_sort(int *a, u_int p, u_int j, u_int *top)
+size_t	quick_sort(int *a, size_t p, size_t j, size_t *top)
 {
-	u_int	i;
-	u_int	x;
+	size_t	i;
+	size_t	x;
 
 	if (!(p < j))
 		return (1);

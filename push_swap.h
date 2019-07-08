@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/07 17:12:54 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:42:54 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,46 @@
 # define PUSH_SWAP_H
 
 # include <stdbool.h>
-
-# define u_int	unsigned int
+# include <string.h>
 
 typedef struct	s_target
 {
-	u_int	ra;
+	size_t	ra;
 	bool	ra_toggle;
-	u_int	rra;
+	size_t	rra;
 	bool	rra_toggle;
-	u_int	rb;
+	size_t	rb;
 	bool	rb_toggle;
-	u_int	rrb;
+	size_t	rrb;
 	bool	rrb_toggle;
-	u_int	rr;
+	size_t	rr;
 	bool	rr_toggle;
-	u_int	rrr;
-	u_int	rrr_toggle;
-	u_int	index;
+	size_t	rrr;
+	size_t	rrr_toggle;
+	size_t	index;
 	int		value;
-	u_int	instr;
+	size_t	instr;
 }				t_target;
 
-int		swap_a_b(int *a_b, u_int top);
-int		swap_both(int *a, u_int top_a, int *b, u_int top_b);
-int		push_a_b(int *src, u_int *top_src, int *dst, u_int *top_b);
-int		rotate_a_b(int *a_b, u_int top);
-int		rotate_both(int *a, u_int top_a, int *b, u_int top_b);
+int		swap_a_b(int *a_b, size_t top);
+int		swap_both(int *a, size_t top_a, int *b, size_t top_b);
+int		push_a_b(int *src, size_t *top_src, int *dst, size_t *top_b);
+int		rotate_a_b(int *a_b, size_t top);
+int		rotate_both(int *a, size_t top_a, int *b, size_t top_b);
 
-int		rev_rotate_a_b(int *a_b, u_int top);
-int		rev_rotate_both(int *a, u_int top_a, int *b, u_int top_b);
+int		rev_rotate_a_b(int *a_b, size_t top);
+int		rev_rotate_both(int *a, size_t top_a, int *b, size_t top_b);
 int		check_input_arrays(int argc, char **argv);
-int		check_doubles(int *a, u_int top_a);
+int		check_doubles(int *a, size_t top_a);
 int		check_integers(int argc, char **argv);
 
-int		check_arr(int *a, u_int top_a, u_int top_b);
-int		run_algo(int *a, u_int *top_a, int *b, u_int *top_b);
-int		check_array(int *a, u_int *top_a, u_int *top_b);
+int		check_arr(int *a, size_t top_a, size_t top_b);
+int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b);
+int		check_array(int *a, size_t *top_a, size_t *top_b);
 
-int		algo(int *a, int *b, u_int *top);
+int		algo(int *a, int *b, size_t *top);
 
-void	get_min_algo(int *a, int *b, u_int *top);
+void	get_min_algo(int *a, int *b, size_t *top);
 
-u_int	quick_sort(int *a, u_int p, u_int j, u_int *top);
-
-u_int	build_arrays(int argc, char **argv, int *a, int *b);
+size_t	quick_sort(int *a, size_t p, size_t j, size_t *top);
 #endif

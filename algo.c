@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/07 15:41:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:33:38 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 ** MAX of B or the one right under the value of the card to move within A
 */
 
-u_int	get_move_b(int move_a, int *b, u_int *top)
+size_t	get_move_b(int move_a, int *b, size_t *top)
 {
-	u_int	max;
-	u_int	under;
-	u_int	i;
-	u_int	min;
+	size_t	max;
+	size_t	under;
+	size_t	i;
+	size_t	min;
 	int		i_under;
 
 	max = 0;
@@ -56,7 +56,7 @@ u_int	get_move_b(int move_a, int *b, u_int *top)
 ** chosen card on top of the B pile / Information stored in t_target struct
 */
 
-void	get_rot(u_int *top, u_int move_a, u_int move_b, t_target *cr)
+void	get_rot(size_t *top, size_t move_a, size_t move_b, t_target *cr)
 {
 	cr->ra = top[0] - move_a - 1;
 	cr->rra = move_a + 1;
@@ -68,7 +68,7 @@ void	get_rot(u_int *top, u_int move_a, u_int move_b, t_target *cr)
 ** This function resets a t_target structure
 */
 
-void	rst_stru(t_target *stru, u_int index)
+void	rst_stru(t_target *stru, size_t index)
 {
 	if (index != 1)
 	{
@@ -118,7 +118,7 @@ void	cpy_stru(t_target *src, t_target *dst)
 ** the input index (which corresponds to the right combination of instructions)
 */
 
-void	switch_toggles(t_target *cr, u_int i)
+void	switch_toggles(t_target *cr, size_t i)
 {
 	rst_stru(cr, 1);
 	if (i == 0)
@@ -184,8 +184,8 @@ void	switch_toggles(t_target *cr, u_int i)
 
 void	get_instr(t_target *cr)
 {
-	u_int	tab[4];
-	u_int	i;
+	size_t	tab[4];
+	size_t	i;
 
 	i = 0;
 	tab[0] = cr->ra > cr->rb ? cr->ra : cr->rb;
@@ -208,7 +208,7 @@ void	get_instr(t_target *cr)
 ** on the standard output as they are being executed
 */
 
-void	exe_instr(int *a, int *b, u_int *top, t_target *final)
+void	exe_instr(int *a, int *b, size_t *top, t_target *final)
 {
 	if (final->ra_toggle == true)
 	{
@@ -273,12 +273,12 @@ void	exe_instr(int *a, int *b, u_int *top, t_target *final)
 ** value on top of the stack in order to be able to push all cards back to a
 */
 
-void	rotate_b_max(int *b, u_int *top)
+void	rotate_b_max(int *b, size_t *top)
 {
-	u_int	i;
-	u_int	max;
-	u_int	rot;
-	u_int	rev_rot;
+	size_t	i;
+	size_t	max;
+	size_t	rot;
+	size_t	rev_rot;
 
 	i = top[1];
 	max = 0;
@@ -307,12 +307,12 @@ void	rotate_b_max(int *b, u_int *top)
 ** Algo principal
 */
 
-int		algo(int *a, int *b, u_int *top)
+int		algo(int *a, int *b, size_t *top)
 {
 	t_target	cr;
 	t_target	final;
-	u_int		move_a;
-	u_int		move_b;
+	size_t		move_a;
+	size_t		move_b;
 
 	// pushing the first two, this can be optimized easily by handling piles of
 	// 1 / 2 / 3 first, and then calling this algorithm
