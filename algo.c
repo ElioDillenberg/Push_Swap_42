@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 18:27:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:21:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ void	get_rot(size_t *top, size_t move_a, size_t move_b, t_target *cr)
 
 /*
 ** This function resets a t_target structure
+** Depending on the indicated option it will reset only the flags or not
 */
 
-void	rst_stru(t_target *stru, size_t index)
+void	rst_stru(t_target *stru, size_t option)
 {
-	if (index != 1)
+	if (option != 1)
 	{
 		stru->ra = 0;
 		stru->rra = 0;
@@ -281,13 +282,13 @@ void	rotate_b_max(int *b, size_t *top)
 	size_t	rev_rot;
 
 	i = top[1];
-	max = 0;
+	max = top[1] - 1;
 	while (--i < top[1])
 	{
 		if (b[i] > b[max])
 			max = i;
 	}
-	rot = top[0] - max - 1;
+	rot = top[1] - max - 1;
 	rev_rot = max + 1;
 	if (rot <= rev_rot)
 		while (rot-- > 0)
@@ -302,7 +303,6 @@ void	rotate_b_max(int *b, size_t *top)
 			rev_rotate_a_b(b, top[1]);
 		}
 }
-
 
 /*
 ** This function has to get me the top 3 values within my table and place them
@@ -320,34 +320,51 @@ void	get_top_3(int *a, size_t *top, int *top_3)
 	while (i < top[0])
 	{
 		if (a[i] > top_3[0])
+		{
+			top_3[2] = top_3[1];
+			top_3[1] = top_3[0];
 			top_3[0] = a[i];
+		}
 		else if (a[i] > top_3[1])
+		{
+			top_3[2] = top_3[1];
 			top_3[1] = a[i];
+		}
 		else if (a[i] > top_3[2])
 			top_3[2] = a[i];
 		i++;
 	}
 }
 
+/*
+** This function will push the first two of A (which are not part of the top 3)
+** on top of B
+*/
+
 void	push_first_two(int *a, int *b, size_t *top, int *top_3)
 {
-	size_t  i;
 	size_t	push_counter;
 
-	i = 0;
 	push_counter = 0;
-
-	while (i < top[0] && push_counter < 2)
+	while (push_counter < 2 && top[0] > 3)
 	{
-		if (a[i] < top_3[2])
+		if (a[top[0] - 1] < top_3[2])
 		{
-			ft_putstr("pa\n");
+			ft_putstr("pb\n");
 			push_a_b(a, &(top[0]), b, &(top[1]));
 			push_counter++;
 		}
-		i++;
+		else
+		{
+			ft_putstr("ra\n");
+			rotate_a_b(a, top[0]);
+		}
 	}
 }
+
+/*
+** This function handles easy cases: sorted list, nearly sorted list (swap, rota
+*/
 
 /*
 ** Algo principal
@@ -361,15 +378,10 @@ int		algo(int *a, int *b, size_t *top)
 	size_t		move_b;
 	int			top_3[3];
 
+	easy(a, top);
 	get_top_3(a, top, top_3);
 	push_first_two(a, b, top, top_3);
-	/*
-	ft_putstr("pb\n");
-	push_a_b(a, &(top[0]), b, &(top[1]));
-	ft_putstr("pb\n");
-	push_a_b(a, &(top[0]), b, &(top[1]));
-	*/
-	while (top[0] > 2)
+	while (top[0] > 3)
 	{
 		rst_stru(&final, 0);
 		move_a = 0;
@@ -389,11 +401,11 @@ int		algo(int *a, int *b, size_t *top)
 		exe_instr(a, b, top, &final);
 	}
 	rotate_b_max(b, top);
-	sort_three(a);
+	sort_three(a, top);
 	while (top[1] > 0)
 	{
 		ft_putstr("pa\n");
-		top[1]--;
+		push_a_b(b, &(top[1]), a, &(top[0]));
 	}
 	return (0);
 }
