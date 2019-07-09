@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 18:53:51 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/25 17:50:08 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:30:28 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** sa / sb / ss / pa / pb / ra / rb / rr
 */
 
-int		swap_a_b(int *a_b, u_int top)
+int		swap_a_b(int *a_b, size_t top)
 {
 	int	temp;
 
@@ -30,14 +30,14 @@ int		swap_a_b(int *a_b, u_int top)
 	return (0);
 }
 
-int		swap_both(int *a, u_int top_a, int *b, u_int top_b)
+int		swap_both(int *a, size_t top_a, int *b, size_t top_b)
 {
 	swap_a_b(a, top_a);
 	swap_a_b(b, top_b);
 	return (0);
 }
 
-int		push_a_b(int *src, u_int *top_src, int *dst, u_int *top_dst)
+int		push_a_b(int *src, size_t *top_src, int *dst, size_t *top_dst)
 {
 	if (*top_src == 0)
 		return (-1);
@@ -47,9 +47,9 @@ int		push_a_b(int *src, u_int *top_src, int *dst, u_int *top_dst)
 	return (0);
 }
 
-int		rotate_a_b(int *a_b, u_int top)
+int		rotate_a_b(int *a_b, size_t top)
 {
-	u_int	x;
+	size_t	x;
 	int		temp;
 
 	if (top < 2)
@@ -62,7 +62,7 @@ int		rotate_a_b(int *a_b, u_int top)
 	return (0);
 }
 
-int		rotate_both(int *a, u_int top_a, int *b, u_int top_b)
+int		rotate_both(int *a, size_t top_a, int *b, size_t top_b)
 {
 	rotate_a_b(a, top_a);
 	rotate_a_b(b, top_b);

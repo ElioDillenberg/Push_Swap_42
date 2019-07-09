@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/09 15:21:31 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:50:00 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,8 +363,43 @@ void	push_first_two(int *a, int *b, size_t *top, int *top_3)
 }
 
 /*
-** This function handles easy cases: sorted list, nearly sorted list (swap, rota
+** This function decides which option is best, when number of instructions are
+** equal in both cases
 */
+
+void	equal_instr(t_target *cr, t_target *final, int *b, size_t *top)
+{
+	size_t	i;
+	size_t	max;
+	int		rotz_cr;
+	int		rotz_final;
+
+	i = top[1];
+	max = top[1] - 1;
+	while (--i < top[1])
+	{
+		if (b[i] > b[max])
+			max = i;
+	}
+	if (cr->rb_toggle == true || cr->rr_toggle == true)
+	{
+		if ((rotz_cr = (cr->rb + cr->rr) - (top[1] - max -1)) < 0)
+			rotz_cr *= -1;
+	}
+	else
+		if ((rotz_cr = (cr->rrb + cr->rrr) - (max + 1)) < 0)
+			rotz_cr *= -1;
+	if (final->rb_toggle == true || final->rr_toggle == true)
+	{
+		if ((rotz_final = (final->rb + final->rr) - (top[1] - max -1)) < 0)
+			rotz_final *= -1;
+	}
+	else
+		if ((rotz_final = (final->rrb + final->rrr) - (max + 1)) < 0)
+			rotz_final *= -1;
+	if (rotz_cr < rotz_final)
+		cpy_stru(cr, final);
+}
 
 /*
 ** Algo principal
@@ -378,7 +413,6 @@ int		algo(int *a, int *b, size_t *top)
 	size_t		move_b;
 	int			top_3[3];
 
-	easy(a, top);
 	get_top_3(a, top, top_3);
 	push_first_two(a, b, top, top_3);
 	while (top[0] > 3)
@@ -395,6 +429,8 @@ int		algo(int *a, int *b, size_t *top)
 				get_instr(&cr);
 				if (cr.instr < final.instr)
 					cpy_stru(&cr, &final);
+				else if (cr.instr == final.instr)
+					equal_instr(&cr, &final, b, top);
 			}
 			move_a++;
 		}

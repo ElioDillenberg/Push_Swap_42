@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 13:27:01 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/09 19:13:15 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int		check_arr(int *a, size_t top_a, size_t top_b)
-{
-	size_t	i;
-
-	if (top_b != 0)
-		return (-1);
-	i = 0;
-	while (i < top_a - 1)
-	{
-		if (a[i] < a[i + 1])
-			return (-1);
-		i++;
-	}
-	return (0);
-}
+/*
+** This function reads on sdin thanks to get next line
+** it executes functions according to instruction found
+*/
 
 int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
 {
@@ -65,6 +54,7 @@ int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
 			ft_memdel((void**)&command);
 			return (-1);
 		}
+		ft_memdel((void**)&command);
 	}
 	return (0);
 }
@@ -90,7 +80,7 @@ int		main(int argc, char **argv)
 	top_a = argc - 1;
 	top_b = 0;
 	if (check_doubles(a, top_a) == -1 || run_algo(a, &top_a, b, &top_b) == -1)
-		return (ft_printf("Error\n"));
+		return ((int)write(2, "Error\n", 6));
 	check_arr(a, top_a, top_b) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);

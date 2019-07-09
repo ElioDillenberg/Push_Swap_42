@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/09 15:25:27 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:42:02 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		check_input_arrays(int argc, char **argv);
 int		check_doubles(int *a, size_t top_a);
 int		check_integers(int argc, char **argv);
 
-int		check_arr(int *a, size_t top_a, size_t top_b);
 int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b);
 int		check_array(int *a, size_t *top_a, size_t *top_b);
 
@@ -55,4 +54,6 @@ int		algo(int *a, int *b, size_t *top);
 
 void	sort_three(int *a, size_t *top);
 void	less_than_four(int *a, size_t *top);
+
+int		check_arr(int *a, size_t top_a, size_t top_b);
 #endif
