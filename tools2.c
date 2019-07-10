@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:19:28 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/08 11:46:27 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:10:02 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 #include "push_swap.h"
 
 /*
-** This file contains the function to execute following commands:
-** rra / rrb / rrr
-** Added function needed to check input in both push_swap and checker
+** Function used to execute both RRA and RRB
 */
 
-int		rev_rotate_a_b(int *a_b, size_t top)
+int			rev_rotate_a_b(int *a_b, size_t top)
 {
 	size_t	x;
 	int		temp;
@@ -37,69 +35,50 @@ int		rev_rotate_a_b(int *a_b, size_t top)
 	return (0);
 }
 
-int		rev_rotate_both(int *a, size_t top_a, int *b, size_t top_b)
+/*
+** Function that executes RRR
+*/
+
+int			rev_rotate_both(int *a, size_t top_a, int *b, size_t top_b)
 {
 	rev_rotate_a_b(a, top_a);
 	rev_rotate_a_b(b, top_b);
 	return (0);
 }
 
-int		check_doubles(int *a, size_t top_a)
-{
-	size_t	i;
-	size_t	j;
+/*
+** Copy t_target structure content to another t_target structure
+*/
 
-	i = -1;
-	j = 0;
-	while (++i < top_a)
-	{
-		j = i;
-		while (++j < top_a)
-			if (a[j] == a[i])
-				return (-1);
-	}
-	return (0);
+void		cpy_stru(t_target *src, t_target *dst)
+{
+	dst->ra = src->ra;
+	dst->ra_toggle = src->ra_toggle;
+	dst->rb = src->rb;
+	dst->rb_toggle = src->rb_toggle;
+	dst->rra = src->rra;
+	dst->rra_toggle = src->rra_toggle;
+	dst->rrb = src->rrb;
+	dst->rrb_toggle = src->rrb_toggle;
+	dst->rr = src->rr;
+	dst->rr_toggle = src->rr_toggle;
+	dst->rrr = src->rrr;
+	dst->rrr_toggle = src->rrr_toggle;
+	dst->index = src->index;
+	dst->instr = src->instr;
 }
 
-static int	max_min_integer_check(int i, char **argv)
-{
-	if (argv[i][0] == '-')
-	{
-		if (ft_strcmp(argv[i], "-2147483648") > 0)
-			return (-1);
-	}
-	else if (argv[i][0] == '+')
-	{
-		if (ft_strcmp(argv[i], "+2147483647") > 0)
-			return (-1);
-	}
-	else
-		if (ft_strcmp(argv[i], "2147483647") > 0)
-			return (-1);
-	return (0);
-}
+/*
+** This function gets the number of RA and RRA needed to put current card on
+** top of the A pile and this function gets the number of RB and RRB needto put
+** chosen card on top of the B pile / Information stored in t_target struct
+*/
 
-int		check_integers(int argc, char **argv)
+void		get_rot_instr(size_t *top, size_t m_a, size_t m_b, t_target *cr)
 {
-	int		i;
-	int		j;
-	int		x;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = 0;
-		x = 0;
-		if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
-			j++;
-		while (argv[i][j])
-		{
-			if (ft_isdigit(argv[i][j++]) == 0 || ++x > 10)
-				return (-1);
-			if (x == 10)
-				if (max_min_integer_check(i, argv) == -1)
-					return (-1);
-		}
-	}
-	return (0);
+	cr->ra = top[0] - m_a - 1;
+	cr->rra = m_a + 1;
+	cr->rb = top[1] - m_b - 1;
+	cr->rrb = m_b + 1;
+	get_instr(cr);
 }

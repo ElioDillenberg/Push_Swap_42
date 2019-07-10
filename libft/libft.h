@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:39:30 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/07 14:59:37 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 16:03:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@
 # define OM OPEN_MAX
 # define ULL unsigned long long
 
-typedef struct		s_list
+typedef struct	s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-}					t_list;
+}				t_list;
 
-typedef struct		s_node
+typedef struct	s_node
 {
 	int				key;
 	size_t			str_size;
 	char			*str;
 	struct s_node	*next;
-}					t_node;
+}				t_node;
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -113,6 +113,5 @@ void			ft_swap(int	*a, int *b);
 ULL				ft_po(ULL nb, int po);
 int				ft_sqrt(int nb);
 int				ft_printf(const char *fmt, ...);
-char			**ft_split_whitespaces(char *str);
 
 #endif

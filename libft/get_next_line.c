@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 14:26:09 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/20 15:59:35 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:49:22 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ char	*trim_to_eol(char **str)
 	char	*result;
 	char	*new_str;
 	int		len;
+	int		i;
 
 	len = 0;
 	while ((*str)[len] != '\n' && (*str)[len])
 		len++;
+	i = ft_strlen(*str) - len;
 	if (!(result = ft_strsub((const char**)str, 0, len, 0)))
 		return (NULL);
-	if (!(new_str = ft_strsub((const char**)str, len + 1, (ft_strlen(*str) - len), 0)))
+	if (!(new_str = ft_strsub((const char**)str, len + 1, i, 0)))
 		return (NULL);
 	free(*str);
 	*str = new_str;

@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 11:28:49 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/07 15:00:00 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/10 15:43:28 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,8 +101,7 @@ SOURCES = ft_memset.c \
 		  tools.c \
 		  fill_float.c \
 		  floatools.c \
-		  color.c \
-		  ft_split_whitespaces.c
+		  color.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

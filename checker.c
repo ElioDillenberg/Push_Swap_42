@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/09 19:13:15 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 16:42:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,34 @@
 #include <unistd.h>
 
 /*
+** This function takes care of the rotation functions within run algo
+*/
+
+static int	check_rot_instr(char *command, int *a, int *b, size_t *top)
+{
+	if (ft_strcmp(command, "ra") == 0)
+		rotate_a_b(a, top[0]);
+	else if (ft_strcmp(command, "rb") == 0)
+		rotate_a_b(b, top[1]);
+	else if (ft_strcmp(command, "rr") == 0)
+		rotate_both(a, top[0], b, top[1]);
+	else if (ft_strcmp(command, "rra") == 0)
+		rev_rotate_a_b(a, top[0]);
+	else if (ft_strcmp(command, "rrb") == 0)
+		rev_rotate_a_b(b, top[1]);
+	else if (ft_strcmp(command, "rrr") == 0)
+		rev_rotate_both(a, top[0], b, top[1]);
+	else
+		return (-1);
+	return (0);
+}
+
+/*
 ** This function reads on sdin thanks to get next line
 ** it executes functions according to instruction found
 */
 
-int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
+static int	run_algo(int *a, int *b, size_t *top)
 {
 	char	*command;
 	int		ret;
@@ -28,28 +51,16 @@ int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
 	while ((ret = get_next_line(0, &command)) && ret != -1 && ret != 0)
 	{
 		if (ft_strcmp(command, "sa") == 0)
-			swap_a_b(a, *top_a);
+			swap_a_b(a, top[0]);
 		else if (ft_strcmp(command, "sb") == 0)
-			swap_a_b(b, *top_b);
+			swap_a_b(b, top[1]);
 		else if (ft_strcmp(command, "ss") == 0)
-			swap_both(a, *top_a, b, *top_b);
+			swap_both(a, top[0], b, top[1]);
 		else if (ft_strcmp(command, "pa") == 0)
-			push_a_b(b, top_b, a, top_a);
+			push_a_b(b, &(top[1]), a, &(top[0]));
 		else if (ft_strcmp(command, "pb") == 0)
-			push_a_b(a, top_a, b, top_b);
-		else if (ft_strcmp(command, "ra") == 0)
-			rotate_a_b(a, *top_a);
-		else if (ft_strcmp(command, "rb") == 0)
-			rotate_a_b(b, *top_b);
-		else if (ft_strcmp(command, "rr") == 0)
-			rotate_both(a, *top_a, b, *top_b);
-		else if (ft_strcmp(command, "rra") == 0)
-			rev_rotate_a_b(a, *top_a);
-		else if (ft_strcmp(command, "rrb") == 0)
-			rev_rotate_a_b(b, *top_b);
-		else if (ft_strcmp(command, "rrr") == 0)
-			rev_rotate_both(a, *top_a, b, *top_b);
-		else
+			push_a_b(a, &(top[0]), b, &(top[1]));
+		else if (check_rot_instr(command, a, b, top) == -1)
 		{
 			ft_memdel((void**)&command);
 			return (-1);
@@ -59,29 +70,28 @@ int		run_algo(int *a, size_t *top_a, int *b, size_t *top_b)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		*a;
 	int		*b;
-	size_t	top_a;
-	size_t	top_b;
+	size_t	top[2];
 
 	if (argc == 1 || check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
-	top_a = argc - 1;
-	top_b = 0;
-	if (!(a = (int*)malloc(sizeof(int) * top_a)))
+	top[0] = argc - 1;
+	top[1] = 0;
+	if (!(a = (int*)malloc(sizeof(int) * top[0])))
 		return (-1);
-	if (!(b = (int*)malloc(sizeof(int) * top_a)))
+	if (!(b = (int*)malloc(sizeof(int) * top[0])))
 		return (-1);
-	while (--top_a > 0)
-		a[top_b++] = ft_atoi(argv[top_a + 1]);
-	a[top_b] = ft_atoi(argv[top_a + 1]);
-	top_a = argc - 1;
-	top_b = 0;
-	if (check_doubles(a, top_a) == -1 || run_algo(a, &top_a, b, &top_b) == -1)
+	while (--top[0] > 0)
+		a[top[1]++] = ft_atoi(argv[top[0] + 1]);
+	a[top[1]] = ft_atoi(argv[top[0] + 1]);
+	top[0] = argc - 1;
+	top[1] = 0;
+	if (check_dbl(a, b, top[0]) == -1 || run_algo(a, b, top) == -1)
 		return ((int)write(2, "Error\n", 6));
-	check_arr(a, top_a, top_b) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
+	check_arr(a, top[0], top[1]) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);
 	return (0);
