@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 11:28:49 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/10 15:43:28 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/11 18:10:06 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SOURCES = ft_memset.c \
 		  ft_lstputstr.c \
 		  ft_lstlen.c \
 		  ft_putstrclr.c \
+		  get_next_line_multi.c \
 		  get_next_line.c \
 		  ft_bitoa.c \
 		  ft_free_stropt.c \

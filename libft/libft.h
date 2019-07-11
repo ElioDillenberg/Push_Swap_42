@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:39:30 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 16:03:09 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:43:55 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <limits.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 10
 # define OM OPEN_MAX
 # define ULL unsigned long long
 
@@ -98,6 +98,7 @@ void			ft_lstrev(t_list **alst);
 void			ft_lstputstr(t_list **alst);
 size_t			ft_lstlen(t_list **alst);
 void			ft_putstrclr(const char *s, const char *color_input);
+int				get_next_line_multi(const int fd, char **line);
 int				get_next_line(const int fd, char **line);
 char			*ft_bitoa(void *input, size_t size);
 void			*ft_free_stropt(char **s1, char **s2, char option);

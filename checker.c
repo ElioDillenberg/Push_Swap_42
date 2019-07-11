@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 16:42:09 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 20:08:58 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "push_swap.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include <getopt.h>
+#include <ncurses.h>
 
 /*
 ** This function takes care of the rotation functions within run algo
@@ -74,8 +76,10 @@ int			main(int argc, char **argv)
 {
 	int		*a;
 	int		*b;
+//	int		opt;
 	size_t	top[2];
 
+//	opt = getopt(argc, argv, "v");
 	if (argc == 1 || check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
 	top[0] = argc - 1;
