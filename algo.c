@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 12:36:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:43:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,7 @@ void	push_first_two(int *a, int *b, size_t *top, int *top_5)
 	}
 }
 
-/*
-** This function has to get me the top 5 values within my table and place them
-** inside the top_5 tab
-*/
-
-void	get_top_5(int *a, int *b, size_t *top, int *top_5)
+void		get_top_5(int *a, int *b, size_t *top, int *top_5)
 {
 	size_t	i;
 
@@ -99,30 +94,63 @@ void	get_top_5(int *a, int *b, size_t *top, int *top_5)
 			top_5[1] = top_5[0];
 			top_5[0] = a[i];
 		}
-		else if (a[i] > top_5[1])
-		{
-			top_5[4] = top_5[3];
-			top_5[3] = top_5[2];
-			top_5[2] = top_5[1];
-			top_5[1] = a[i];
-		}
-		else if (a[i] > top_5[2])
-		{
-			top_5[4] = top_5[3];
-			top_5[3] = top_5[2];
-			top_5[2] = a[i];
-		}
-		else if (a[i] > top_5[3])
-		{
-			top_5[4] = top_5[3];
-			top_5[3] = a[i];
-		}
 		else if (a[i] > top_5[4])
-			top_5[4] = a[i];
+			bigger_than_top_4(a, i, top_5);
 		i++;
 	}
 	push_first_two(a, b, top, top_5);
 }
+
+
+/*
+** This function has to get me the top 5 values within my table and place them
+** inside the top_5 tab
+
+ void	get_top_5(int *a, int *b, size_t *top, int *top_5)
+ {
+ size_t	i;
+
+ i = 0;
+ top_5[0] = -2147483648;
+ top_5[1] = -2147384638;
+ top_5[2] = -2147483648;
+ top_5[3] = -2147483648;
+ top_5[4] = -2147483648;
+ while (i < top[0])
+ {
+ if (a[i] > top_5[0])
+ {
+ top_5[4] = top_5[3];
+ top_5[3] = top_5[2];
+ top_5[2] = top_5[1];
+ top_5[1] = top_5[0];
+ top_5[0] = a[i];
+ }
+ else if (a[i] > top_5[1])
+ {
+ top_5[4] = top_5[3];
+ top_5[3] = top_5[2];
+ top_5[2] = top_5[1];
+ top_5[1] = a[i];
+ }
+ else if (a[i] > top_5[2])
+ {
+ top_5[4] = top_5[3];
+ top_5[3] = top_5[2];
+ top_5[2] = a[i];
+ }
+ else if (a[i] > top_5[3])
+ {
+ top_5[4] = top_5[3];
+ top_5[3] = a[i];
+ }
+ else if (a[i] > top_5[4])
+ top_5[4] = a[i];
+ i++;
+ }
+ push_first_two(a, b, top, top_5);
+ }
+ */
 
 /*
 ** This function decides which option is best, when number of instructions are
@@ -170,7 +198,7 @@ int		algo(int *a, int *b, size_t *top)
 	int			top_5[5];
 
 	get_top_5(a, b, top, top_5);
-	while (top[0] > 3 && rst_stru(&final, 0))
+	while (top[0] > 5 && rst_stru(&final, 0))
 	{
 		move_a = 0;
 		while (move_a < top[0])
@@ -187,6 +215,16 @@ int		algo(int *a, int *b, size_t *top)
 		}
 		exe_instr(a, b, top, &final);
 	}
-	rot_b_nd_push_a(a, b, top);
+//	ft_printf("THIS IS B:\n");
+//	ft_printf("b[top[1] - 1] = %d\n", b[top[1] - 1]);
+//	ft_printf("b[top[1] - 2] = %d\n", b[top[1] - 2]);
+//	ft_printf("b[top[1] - 3] = %d\n", b[top[1] - 3]);
+//	ft_printf("THIS IS A:\n");
+//	ft_printf("a[top[0] - 1] = %d\n", a[top[0] - 1]);
+//	ft_printf("a[top[0] - 2] = %d\n", a[top[0] - 2]);
+//	ft_printf("a[top[0] - 3] = %d\n", a[top[0] - 3]);
+//	ft_printf("a[top[0] - 4] = %d\n", a[top[0] - 4]);
+//	ft_printf("a[top[0] - 5] = %d\n", a[top[0] - 5]);
+	rot_b_nd_push_a(a, b, top, top_5);
 	return (0);
 }

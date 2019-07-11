@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:06:21 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 12:41:33 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:44:01 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,17 @@ static void	rotate_b_max(int *a, int *b, size_t *top, int *top_5)
 			ft_putstr("rrb\n");
 			rev_rotate_a_b(b, top[1]);
 		}
+//	ft_printf("This is B after rotate_b_max\n");
+//	ft_printf("b[top[1] - 1] = %d\n", b[top[1] - 1]);
+//	ft_printf("b[top[1] - 2] = %d\n", b[top[1] - 2]);
+//	ft_printf("b[top[1] - 3] = %d\n", b[top[1] - 3]);
 	get_top_4_top_5(a, b, top, top_5);
+//	ft_printf("This is B after get_top_4_5\n");
+//	ft_printf("b[top[1] - 1] = %d\n", b[top[1] - 1]);
+//	ft_printf("b[top[1] - 2] = %d\n", b[top[1] - 2]);
+//	ft_printf("b[top[1] - 3] = %d\n", b[top[1] - 3]);
+//	ft_printf("b[top[1] - 4] = %d\n", b[top[1] - 4]);
+//	ft_printf("b[top[1] - 5] = %d\n", b[top[1] - 5]);
 	sort_three(a, top);
 }
 

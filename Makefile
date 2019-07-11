@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/11 12:38:46 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/11 13:43:37 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = $(addsuffix .c, checker push_swap algo tools tools2 final_instructions \
 
 OBJ = $(SRC:.c=.o)
 OBJCHECKER = $(addsuffix .o, checker tools tools2 final_instructions checks \
-			 get_instructions)
+			 get_instructions handle_top_5)
 OBJPUSHSWAP = $(addsuffix .o, push_swap algo tools tools2 final_instructions \
 			  checks exe_instructions get_instructions handle_top_5)
 
