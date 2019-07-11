@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 14:43:32 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:06:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ size_t	get_move_b(int move_a, int *b, size_t *top)
 }
 
 /*
-** This function will push the first two of A (which are not part of the top 5)
+** This function will push the first two of A (which are not part of the top 3)
 ** on top of B
 */
 
-void	push_first_two(int *a, int *b, size_t *top, int *top_5)
+void	push_first_two(int *a, int *b, size_t *top, int *top_3)
 {
 	size_t	push_counter;
 
 	push_counter = 0;
 	while (push_counter < 2 && top[0] > 3)
 	{
-		if (a[top[0] - 1] < top_5[4])
+		if (a[top[0] - 1] < top_3[2])
 		{
 			ft_putstr("pb\n");
 			push_a_b(a, &(top[0]), b, &(top[1]));
@@ -74,83 +74,38 @@ void	push_first_two(int *a, int *b, size_t *top, int *top_5)
 	}
 }
 
-void		get_top_5(int *a, int *b, size_t *top, int *top_5)
+/*
+** This function has to get me the top 3 values within my table and place them
+** inside the top_3 tab
+*/
+
+void	get_top_3(int *a, int *b, size_t *top, int *top_3)
 {
 	size_t	i;
 
 	i = 0;
-	top_5[0] = -2147483648;
-	top_5[1] = -2147384638;
-	top_5[2] = -2147483648;
-	top_5[3] = -2147483648;
-	top_5[4] = -2147483648;
+	top_3[0] = -2147483648;
+	top_3[1] = -2147384638;
+	top_3[2] = -2147483648;
 	while (i < top[0])
 	{
-		if (a[i] > top_5[0])
+		if (a[i] > top_3[0])
 		{
-			top_5[4] = top_5[3];
-			top_5[3] = top_5[2];
-			top_5[2] = top_5[1];
-			top_5[1] = top_5[0];
-			top_5[0] = a[i];
+			top_3[2] = top_3[1];
+			top_3[1] = top_3[0];
+			top_3[0] = a[i];
 		}
-		else if (a[i] > top_5[4])
-			bigger_than_top_4(a, i, top_5);
+		else if (a[i] > top_3[1])
+		{
+			top_3[2] = top_3[1];
+			top_3[1] = a[i];
+		}
+		else if (a[i] > top_3[2])
+			top_3[2] = a[i];
 		i++;
 	}
-	push_first_two(a, b, top, top_5);
+	push_first_two(a, b, top, top_3);
 }
-
-
-/*
-** This function has to get me the top 5 values within my table and place them
-** inside the top_5 tab
-
- void	get_top_5(int *a, int *b, size_t *top, int *top_5)
- {
- size_t	i;
-
- i = 0;
- top_5[0] = -2147483648;
- top_5[1] = -2147384638;
- top_5[2] = -2147483648;
- top_5[3] = -2147483648;
- top_5[4] = -2147483648;
- while (i < top[0])
- {
- if (a[i] > top_5[0])
- {
- top_5[4] = top_5[3];
- top_5[3] = top_5[2];
- top_5[2] = top_5[1];
- top_5[1] = top_5[0];
- top_5[0] = a[i];
- }
- else if (a[i] > top_5[1])
- {
- top_5[4] = top_5[3];
- top_5[3] = top_5[2];
- top_5[2] = top_5[1];
- top_5[1] = a[i];
- }
- else if (a[i] > top_5[2])
- {
- top_5[4] = top_5[3];
- top_5[3] = top_5[2];
- top_5[2] = a[i];
- }
- else if (a[i] > top_5[3])
- {
- top_5[4] = top_5[3];
- top_5[3] = a[i];
- }
- else if (a[i] > top_5[4])
- top_5[4] = a[i];
- i++;
- }
- push_first_two(a, b, top, top_5);
- }
- */
 
 /*
 ** This function decides which option is best, when number of instructions are
@@ -195,15 +150,15 @@ int		algo(int *a, int *b, size_t *top)
 	t_target	cr;
 	t_target	final;
 	size_t		move_a;
-	int			top_5[5];
+	int			top_3[3];
 
-	get_top_5(a, b, top, top_5);
-	while (top[0] > 5 && rst_stru(&final, 0))
+	get_top_3(a, b, top, top_3);
+	while (top[0] > 3 && rst_stru(&final, 0))
 	{
 		move_a = 0;
 		while (move_a < top[0])
 		{
-			if (a[move_a] < top_5[4])
+			if (a[move_a] < top_3[2])
 			{
 				get_rot_instr(top, move_a, get_move_b(a[move_a], b, top), &cr);
 				if (cr.instr < final.instr)
@@ -215,16 +170,6 @@ int		algo(int *a, int *b, size_t *top)
 		}
 		exe_instr(a, b, top, &final);
 	}
-//	ft_printf("THIS IS B:\n");
-//	ft_printf("b[top[1] - 1] = %d\n", b[top[1] - 1]);
-//	ft_printf("b[top[1] - 2] = %d\n", b[top[1] - 2]);
-//	ft_printf("b[top[1] - 3] = %d\n", b[top[1] - 3]);
-//	ft_printf("THIS IS A:\n");
-//	ft_printf("a[top[0] - 1] = %d\n", a[top[0] - 1]);
-//	ft_printf("a[top[0] - 2] = %d\n", a[top[0] - 2]);
-//	ft_printf("a[top[0] - 3] = %d\n", a[top[0] - 3]);
-//	ft_printf("a[top[0] - 4] = %d\n", a[top[0] - 4]);
-//	ft_printf("a[top[0] - 5] = %d\n", a[top[0] - 5]);
-	rot_b_nd_push_a(a, b, top, top_5);
+	rot_b_nd_push_a(a, b, top);
 	return (0);
 }

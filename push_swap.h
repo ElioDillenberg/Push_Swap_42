@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 13:58:21 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:00:49 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,16 @@ void			cpy_stru(t_target *src, t_target *dst);
 void			get_rot_instr(size_t *top, size_t a, size_t b, t_target *cr);
 
 int				algo(int *a, int *b, size_t *top);
-void			get_top_5(int *a, int *b, size_t *top, int *top_5);
-void			push_first_two(int *a, int *b, size_t *top, int *top_5);
 
 void			get_instr(t_target *cr);
 int				rst_stru(t_target *stru, size_t opion);
 
 void			exe_instr(int *a, int *b, size_t *top, t_target *final);
 
-void			rot_b_nd_push_a(int *a, int *b, size_t *top, int *top_5);
+void			rot_b_nd_push_a(int *a, int *b, size_t *top);
 void			less_than_four(int *a, size_t *top);
 
 int				check_dbl(int *a, int *b, size_t top_a);
 int				check_integers(int argc, char **argv);
 int				check_arr(int *a, size_t top_a, size_t top_b);
-
-void			bigger_than_top_4(int *a, size_t i, int *top5);
-void			get_top_4_top_5(int *a, int *b, size_t *top, int *top_5);
 #endif
