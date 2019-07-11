@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 18:00:49 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:23:38 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ void			less_than_four(int *a, size_t *top);
 int				check_dbl(int *a, int *b, size_t top_a);
 int				check_integers(int argc, char **argv);
 int				check_arr(int *a, size_t top_a, size_t top_b);
+
+void			get_top_5(int *a, int *b, size_t *top, size_t *top_5);
 #endif

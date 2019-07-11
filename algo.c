@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 18:06:09 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:44:46 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,41 @@ void	get_top_3(int *a, int *b, size_t *top, int *top_3)
 	size_t	i;
 
 	i = 0;
-	top_3[0] = -2147483648;
-	top_3[1] = -2147384638;
-	top_3[2] = -2147483648;
+	top_5[0] = -2147483648;
+	top_5[1] = -2147384638;
+	top_5[2] = -2147483648;
+	top_5[3] = -2147483648;
+	top_5[4] = -2147483648;
 	while (i < top[0])
 	{
-		if (a[i] > top_3[0])
+		if (a[i] > top_5[0])
 		{
-			top_3[2] = top_3[1];
-			top_3[1] = top_3[0];
-			top_3[0] = a[i];
+			top_5[4] = top_5[3];
+			top_5[3] = top_5[2];
+			top_5[2] = top_5[1];
+			top_5[1] = top_5[0];
+			top_5[0] = a[i];
 		}
 		else if (a[i] > top_3[1])
 		{
-			top_3[2] = top_3[1];
-			top_3[1] = a[i];
+			top_5[4] = top_5[3];
+			top_5[3] = top_5[2];
+			top_5[2] = top_5[1];
+			top_5[1] = a[i];
 		}
-		else if (a[i] > top_3[2])
-			top_3[2] = a[i];
+		else if (a[i] > top_5[2])
+		{
+			top_5[4] = top_5[3];
+			top_5[3] = top_5[2];
+			top_5[2] = a[i];
+		}
+		else if (a[i] > top_5[3])
+		{
+			top_5[4] = top_5[3];
+			top_5[3] = a[i];
+		}
+		else if (a[i] > top_5[4])
+			top_5[4] = a[i];
 		i++;
 	}
 	push_first_two(a, b, top, top_3);
@@ -150,15 +167,15 @@ int		algo(int *a, int *b, size_t *top)
 	t_target	cr;
 	t_target	final;
 	size_t		move_a;
-	int			top_3[3];
+	int			top_5[5];
 
-	get_top_3(a, b, top, top_3);
+	get_top_5(a, b, top, top_5);
 	while (top[0] > 3 && rst_stru(&final, 0))
 	{
 		move_a = 0;
 		while (move_a < top[0])
 		{
-			if (a[move_a] < top_3[2])
+			if (a[move_a] < top_5[4])
 			{
 				get_rot_instr(top, move_a, get_move_b(a[move_a], b, top), &cr);
 				if (cr.instr < final.instr)
