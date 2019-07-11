@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 11:06:21 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 18:11:04 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 12:41:33 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	sort_three(int *a, size_t *top)
 ** i[0] = i, i[1] = max, i[2] = rot, i[3] = rev_rot
 */
 
-static void	rotate_b_max(int *a, int *b, size_t *top)
+static void	rotate_b_max(int *a, int *b, size_t *top, int *top_5)
 {
 	size_t	i[4];
 
@@ -86,6 +86,7 @@ static void	rotate_b_max(int *a, int *b, size_t *top)
 			ft_putstr("rrb\n");
 			rev_rotate_a_b(b, top[1]);
 		}
+	get_top_4_top_5(a, b, top, top_5);
 	sort_three(a, top);
 }
 
@@ -94,9 +95,11 @@ static void	rotate_b_max(int *a, int *b, size_t *top)
 ** finishing the algorithm and then pushes all B towards A
 */
 
-void		rot_b_nd_push_a(int *a, int *b, size_t *top)
+void		rot_b_nd_push_a(int *a, int *b, size_t *top, int *top_5)
 {
-	rotate_b_max(a, b, top);
+	rotate_b_max(a, b, top, top_5);
+	if (b[top[1] - 1] < b[top[1] - 2])
+		ft_putstr("sb\n");
 	while (top[1]-- > 0)
 		ft_putstr("pa\n");
 }

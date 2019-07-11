@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 10:44:46 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/11 12:36:32 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ size_t	get_move_b(int move_a, int *b, size_t *top)
 }
 
 /*
-** This function will push the first two of A (which are not part of the top 3)
+** This function will push the first two of A (which are not part of the top 5)
 ** on top of B
 */
 
-void	push_first_two(int *a, int *b, size_t *top, int *top_3)
+void	push_first_two(int *a, int *b, size_t *top, int *top_5)
 {
 	size_t	push_counter;
 
 	push_counter = 0;
 	while (push_counter < 2 && top[0] > 3)
 	{
-		if (a[top[0] - 1] < top_3[2])
+		if (a[top[0] - 1] < top_5[4])
 		{
 			ft_putstr("pb\n");
 			push_a_b(a, &(top[0]), b, &(top[1]));
@@ -75,11 +75,11 @@ void	push_first_two(int *a, int *b, size_t *top, int *top_3)
 }
 
 /*
-** This function has to get me the top 3 values within my table and place them
-** inside the top_3 tab
+** This function has to get me the top 5 values within my table and place them
+** inside the top_5 tab
 */
 
-void	get_top_3(int *a, int *b, size_t *top, int *top_3)
+void	get_top_5(int *a, int *b, size_t *top, int *top_5)
 {
 	size_t	i;
 
@@ -99,7 +99,7 @@ void	get_top_3(int *a, int *b, size_t *top, int *top_3)
 			top_5[1] = top_5[0];
 			top_5[0] = a[i];
 		}
-		else if (a[i] > top_3[1])
+		else if (a[i] > top_5[1])
 		{
 			top_5[4] = top_5[3];
 			top_5[3] = top_5[2];
@@ -121,7 +121,7 @@ void	get_top_3(int *a, int *b, size_t *top, int *top_3)
 			top_5[4] = a[i];
 		i++;
 	}
-	push_first_two(a, b, top, top_3);
+	push_first_two(a, b, top, top_5);
 }
 
 /*
