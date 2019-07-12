@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 20:08:58 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:46:27 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,39 @@
 #include "push_swap.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <getopt.h>
-#include <ncurses.h>
+
+/*
+** This function handles the setup of the option tab
+*/
+
+void		handle_options(int *argc, char ***argv, size_t *opt)
+{
+	opt[0] = ft_strcmp((*argv)[1], "-i") == 0 ? 1 : 0;
+	opt[1] = 0;
+	if (opt[0] == 1)
+	{
+		(*argv)++;
+		(*argc)--;
+	}
+}
+
+/*
+** This function allocates memory for the tabs A and B
+*/
+
+static int	malloc_tabs(int **a, int **b, size_t *top, int argc)
+{
+	top[0] = argc - 1;
+	top[1] = 0;
+	if (!(*a = (int*)malloc(sizeof(int) * top[0])))
+		return (-1);
+	if (!(*b = (int*)malloc(sizeof(int) * top[0])))
+	{
+		ft_memdel((void**)a);
+		return (-1);
+	}
+	return (0);
+}
 
 /*
 ** This function takes care of the rotation functions within run algo
@@ -23,7 +54,11 @@
 
 static int	check_rot_instr(char *command, int *a, int *b, size_t *top)
 {
-	if (ft_strcmp(command, "ra") == 0)
+	if (ft_strcmp(command, "pa") == 0)
+		push_a_b(b, &(top[1]), a, &(top[0]));
+	else if (ft_strcmp(command, "pb") == 0)
+		push_a_b(a, &(top[0]), b, &(top[1]));
+	else if (ft_strcmp(command, "ra") == 0)
 		rotate_a_b(a, top[0]);
 	else if (ft_strcmp(command, "rb") == 0)
 		rotate_a_b(b, top[1]);
@@ -45,7 +80,7 @@ static int	check_rot_instr(char *command, int *a, int *b, size_t *top)
 ** it executes functions according to instruction found
 */
 
-static int	run_algo(int *a, int *b, size_t *top)
+static int	run_algo(int *a, int *b, size_t *top, size_t *opt)
 {
 	char	*command;
 	int		ret;
@@ -58,15 +93,14 @@ static int	run_algo(int *a, int *b, size_t *top)
 			swap_a_b(b, top[1]);
 		else if (ft_strcmp(command, "ss") == 0)
 			swap_both(a, top[0], b, top[1]);
-		else if (ft_strcmp(command, "pa") == 0)
-			push_a_b(b, &(top[1]), a, &(top[0]));
-		else if (ft_strcmp(command, "pb") == 0)
-			push_a_b(a, &(top[0]), b, &(top[1]));
 		else if (check_rot_instr(command, a, b, top) == -1)
 		{
 			ft_memdel((void**)&command);
+			ft_memdel((void**)&a);
+			ft_memdel((void**)&b);
 			return (-1);
 		}
+		opt[1]++;
 		ft_memdel((void**)&command);
 	}
 	return (0);
@@ -76,26 +110,23 @@ int			main(int argc, char **argv)
 {
 	int		*a;
 	int		*b;
-//	int		opt;
+	size_t	opt[2];
 	size_t	top[2];
 
-//	opt = getopt(argc, argv, "v");
+	handle_options(&argc, &argv, opt);
 	if (argc == 1 || check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
-	top[0] = argc - 1;
-	top[1] = 0;
-	if (!(a = (int*)malloc(sizeof(int) * top[0])))
-		return (-1);
-	if (!(b = (int*)malloc(sizeof(int) * top[0])))
+	if (malloc_tabs(&a, &b, top, argc) == -1)
 		return (-1);
 	while (--top[0] > 0)
 		a[top[1]++] = ft_atoi(argv[top[0] + 1]);
 	a[top[1]] = ft_atoi(argv[top[0] + 1]);
 	top[0] = argc - 1;
 	top[1] = 0;
-	if (check_dbl(a, b, top[0]) == -1 || run_algo(a, b, top) == -1)
+	if (check_dbl(a, b, top[0]) == -1 || run_algo(a, b, top, opt) == -1)
 		return ((int)write(2, "Error\n", 6));
 	check_arr(a, top[0], top[1]) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
+	opt[0] == 1 ? ft_printf("Instructions = %u\n", opt[1]) :0 ;
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);
 	return (0);

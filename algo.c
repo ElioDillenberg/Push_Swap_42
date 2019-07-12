@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 18:06:09 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/12 15:59:56 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	push_first_two(int *a, int *b, size_t *top, int *top_3)
 }
 
 /*
-** This function has to get me the top 3 values within my table and place them
+** This function gets the top 3 values within A and stores their value
 ** inside the top_3 tab
 */
 
