@@ -6,11 +6,14 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 11:28:49 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/11 18:10:06 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/13 16:51:48 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+CFLAGS = -Wall -Werror -Wextra
+CC = gcc
 
 SOURCES = ft_memset.c \
 		  ft_bzero.c \
@@ -104,17 +107,17 @@ SOURCES = ft_memset.c \
 		  floatools.c \
 		  color.c
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJ = $(SOURCES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) Makefile libft.h ft_printf.h
-	@gcc -Wall -Werror -Wextra -c $(SOURCES)
-	@ar rc $(NAME) $(OBJECTS)
+$(NAME): $(OBJ) Makefile libft.h ft_printf.h
+	@$(CC) $(CFLAGS) -c $(SOURCES)
+	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
 clean:
-	@rm -f $(OBJECTS)
+	@rm -f $(OBJ)
 
 fclean: clean
 	@rm -f $(NAME)

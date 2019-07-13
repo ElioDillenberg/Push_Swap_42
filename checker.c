@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/12 16:46:27 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/13 16:41:58 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,9 @@ int			main(int argc, char **argv)
 	size_t	opt[2];
 	size_t	top[2];
 
-	handle_options(&argc, &argv, opt);
 	if (argc == 1 || check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
+	handle_options(&argc, &argv, opt);
 	if (malloc_tabs(&a, &b, top, argc) == -1)
 		return (-1);
 	while (--top[0] > 0)
@@ -126,7 +126,7 @@ int			main(int argc, char **argv)
 	if (check_dbl(a, b, top[0]) == -1 || run_algo(a, b, top, opt) == -1)
 		return ((int)write(2, "Error\n", 6));
 	check_arr(a, top[0], top[1]) == -1 ? ft_putstr("KO\n") : ft_putstr("OK\n");
-	opt[0] == 1 ? ft_printf("Instructions = %u\n", opt[1]) :0 ;
+	opt[0] == 1 ? ft_printf("Instructions = %u\n", opt[1]) : 0;
 	ft_memdel((void**)&a);
 	ft_memdel((void**)&b);
 	return (0);

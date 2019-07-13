@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/12 15:33:41 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/13 16:47:32 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,21 +34,34 @@ MAGENTA = \033[35m
 BLACK = \033[30m
 NOCOLOR = \033[0m
 
-all: $(NAME)
+all: $(NAME) checker
 
-$(NAME): $(OBJ) Makefile libft/Makefile libft/libft.h
+$(NAME): $(OBJ) Makefile
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
 	@echo "🔫                                                               🔫 $(MAGENTA)"
 	@echo "🔫   [ auteur :  edillenb ]                                      🔫 $(BLUE)"
 	@echo "🔫                                                               🔫 "
-	@echo "🔫                          PUSH SWAP                            🔫 "
+	@echo "🔫                          PUSH_SWAP                            🔫 "
 	@echo "🔫                                                               🔫 "
 	@echo "🔫                                                               🔫 "
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
 	make -C libft
-	@echo "$(BLUE)⚡️ COMPILATION . . . . . . . . . . . . .$(YELLOW)"
-	$(CC) $(CFLAGS) $(LIBFT) $(OBJCHECKER) -o checker
+	@echo "$(BLUE)⚡️ COMPILATION DE PUSH_SWAP. . . . . . . . .$(YELLOW)"
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJPUSHSWAP) -o $(NAME)
+	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+checker: $(OBJ) Makefile
+	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
+	@echo "🔫                                                               🔫 $(MAGENTA)"
+	@echo "🔫   [ auteur :  edillenb ]                                      🔫 $(BLUE)"
+	@echo "🔫                                                               🔫 "
+	@echo "🔫                          CHECKER                              🔫 "
+	@echo "🔫                                                               🔫 "
+	@echo "🔫                                                               🔫 "
+	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
+	make -C libft
+	@echo "$(BLUE)⚡️ COMPILATION DE CHECKER. . . . . . . . . .$(YELLOW)"
+	$(CC) $(CFLAGS) $(LIBFT) $(OBJCHECKER) -o checker
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
 clean:
