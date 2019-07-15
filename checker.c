@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/13 16:41:58 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/15 17:54:17 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 ** This function handles the setup of the option tab
 */
 
-void		handle_options(int *argc, char ***argv, size_t *opt)
+int		handle_opt(int *argc, char ***argv, size_t *opt)
 {
 	opt[0] = ft_strcmp((*argv)[1], "-i") == 0 ? 1 : 0;
 	opt[1] = 0;
+	if (opt[0] == 1 && *argc == 2)
+		return (-1);
 	if (opt[0] == 1)
 	{
 		(*argv)++;
 		(*argc)--;
 	}
+	return (0);
 }
 
 /*
@@ -113,9 +116,10 @@ int			main(int argc, char **argv)
 	size_t	opt[2];
 	size_t	top[2];
 
-	if (argc == 1 || check_integers(argc, argv) == -1)
+	if (argc == 1 || handle_opt(&argc, &argv, opt) == -1)
 		return ((int)write(2, "Error\n", 6));
-	handle_options(&argc, &argv, opt);
+	if (check_integers(argc, argv) == -1)
+		return ((int)write(2, "Error\n", 6));
 	if (malloc_tabs(&a, &b, top, argc) == -1)
 		return (-1);
 	while (--top[0] > 0)

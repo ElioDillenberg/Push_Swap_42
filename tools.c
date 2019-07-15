@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 18:53:51 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 12:27:38 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/15 15:04:13 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		rotate_a_b(int *a_b, size_t top)
 	if (top < 2)
 		return (-1);
 	temp = a_b[top - 1];
-	x = top + 1;
+	x = top;
 	while (--x > 0)
 		a_b[x] = a_b[x - 1];
 	a_b[0] = temp;
