@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:12:27 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 19:57:07 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:49:10 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		get_next_line(const int fd, char **line)
 			ft_memdel((void**)&stor);
 			return (-1);
 		}
-		free(stor);
+		ft_memdel((void**)&stor);
 		stor = temp;
 	}
 	if (ret == 0 && ft_strlen(stor) == 0)

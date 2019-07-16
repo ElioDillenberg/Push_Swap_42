@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/15 17:54:17 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:02:09 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static int	run_algo(int *a, int *b, size_t *top, size_t *opt)
 		opt[1]++;
 		ft_memdel((void**)&command);
 	}
+	ft_memdel((void**)&command);
 	return (0);
 }
 

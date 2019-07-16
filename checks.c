@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 16:37:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/12 11:27:31 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:39:59 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ int			check_integers(int argc, char **argv)
 		j = 0;
 		x = 0;
 		if (j == 0 && (argv[i][j] == '-' || argv[i][j] == '+'))
+		{
 			j++;
+			if (argv[i][j] == '\0')
+				return (-1);
+		}
 		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j++]) == 0 || ++x > 10)

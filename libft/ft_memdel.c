@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:55:09 by edillenb          #+#    #+#             */
-/*   Updated: 2019/06/24 16:09:59 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:50:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_memdel(void **ap)
 {
-	if (!ap || !(*ap))
+	if (ap == NULL || (*ap) == NULL)
 		return ;
 	free(*ap);
 	*ap = NULL;
