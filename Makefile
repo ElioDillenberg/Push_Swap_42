@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/17 15:31:07 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/17 15:59:09 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ checker: $(LIBFT) $(OBJ) push_swap.h Makefile
 
 $(LIBFT): FORCE
 	@echo "$(BLUE)⚡️ CHECKING LIBFT.A. . . . . . . . . .$(YELLOW)"
-	make -C libft/
+	@make -C libft/
 
 FORCE:
 
