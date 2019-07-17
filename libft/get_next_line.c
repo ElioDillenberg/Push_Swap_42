@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:12:27 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/16 17:49:10 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/17 11:34:20 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		get_next_line(const int fd, char **line)
 {
 	int				ret;
 	char			buf[BUFF_SIZE + 1];
-	static char		*stor;
+	static char		*stor = NULL;
 	char			*temp;
 
 	if (!line || fd < 0 || fd > OM || BUFF_SIZE < 1 || m_stor(&stor) == -1)
@@ -71,7 +71,7 @@ int		get_next_line(const int fd, char **line)
 			ft_memdel((void**)&stor);
 			return (-1);
 		}
-		ft_memdel((void**)&stor);
+		free(stor);
 		stor = temp;
 	}
 	if (ret == 0 && ft_strlen(stor) == 0)
