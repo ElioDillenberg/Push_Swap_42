@@ -6,7 +6,7 @@
 #    By: edillenb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/27 16:42:47 by edillenb          #+#    #+#              #
-#    Updated: 2019/07/15 17:54:30 by edillenb         ###   ########.fr        #
+#    Updated: 2019/07/17 15:31:07 by edillenb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,11 @@ EXECS = checker push_swap
 
 SRC = $(addsuffix .c, checker push_swap algo tools tools2 final_instructions \
 	  checks exe_instructions get_instructions)
-
 OBJ = $(SRC:.c=.o)
+
 OBJCHECKER = $(addsuffix .o, checker tools tools2 final_instructions checks \
 			 get_instructions)
+
 OBJPUSHSWAP = $(addsuffix .o, push_swap algo tools tools2 final_instructions \
 			  checks exe_instructions get_instructions)
 
@@ -36,7 +37,7 @@ NOCOLOR = \033[0m
 
 all: $(NAME) checker
 
-$(NAME): $(OBJ) Makefile
+$(NAME): $(LIBFT) $(OBJ) push_swap.h Makefile
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
 	@echo "🔫                                                               🔫 $(MAGENTA)"
 	@echo "🔫   [ auteur :  edillenb ]                                      🔫 $(BLUE)"
@@ -45,12 +46,11 @@ $(NAME): $(OBJ) Makefile
 	@echo "🔫                                                               🔫 "
 	@echo "🔫                                                               🔫 "
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
-	make -C libft
 	@echo "$(BLUE)⚡️ COMPILATION DE PUSH_SWAP. . . . . . . . .$(YELLOW)"
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJPUSHSWAP) -o $(NAME)
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
 
-checker: $(OBJ) Makefile
+checker: $(LIBFT) $(OBJ) push_swap.h Makefile
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 "
 	@echo "🔫                                                               🔫 $(MAGENTA)"
 	@echo "🔫   [ auteur :  edillenb ]                                      🔫 $(BLUE)"
@@ -59,10 +59,15 @@ checker: $(OBJ) Makefile
 	@echo "🔫                                                               🔫 "
 	@echo "🔫                                                               🔫 "
 	@echo "🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 🔫 $(BLACK)"
-	make -C libft
 	@echo "$(BLUE)⚡️ COMPILATION DE CHECKER. . . . . . . . . .$(YELLOW)"
 	$(CC) $(CFLAGS) $(LIBFT) $(OBJCHECKER) -o checker
 	@echo "$(GREEN)TOUT EST ---------------------------> OK$(NOCOLOR)"
+
+$(LIBFT): FORCE
+	@echo "$(BLUE)⚡️ CHECKING LIBFT.A. . . . . . . . . .$(YELLOW)"
+	make -C libft/
+
+FORCE:
 
 clean:
 	make clean -C libft
