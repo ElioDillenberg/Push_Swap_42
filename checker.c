@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:03:50 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/17 11:35:43 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/18 13:28:15 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** This function handles the setup of the option tab
 */
 
-int		handle_opt(int *argc, char ***argv, size_t *opt)
+int			handle_opt(int *argc, char ***argv, size_t *opt)
 {
 	opt[0] = ft_strcmp((*argv)[1], "-i") == 0 ? 1 : 0;
 	opt[1] = 0;
@@ -57,7 +57,9 @@ static int	malloc_tabs(int **a, int **b, size_t *top, int argc)
 
 static int	check_rot_instr(char *command, int *a, int *b, size_t *top)
 {
-	if (ft_strcmp(command, "pa") == 0)
+	if (ft_strcmp(command, "ss") == 0)
+		swap_both(a, top[0], b, top[1]);
+	else if (ft_strcmp(command, "pa") == 0)
 		push_a_b(b, &(top[1]), a, &(top[0]));
 	else if (ft_strcmp(command, "pb") == 0)
 		push_a_b(a, &(top[0]), b, &(top[1]));
@@ -88,25 +90,25 @@ static int	run_algo(int *a, int *b, size_t *top, size_t *opt)
 	char	*command;
 	int		ret;
 
-	while ((ret = get_next_line(0, &command)) && ret != -1 && ret != 0)
+	while ((ret = get_next_line(0, &command, 1)) && ret != -1 && ret != 0)
 	{
 		if (ft_strcmp(command, "sa") == 0)
 			swap_a_b(a, top[0]);
 		else if (ft_strcmp(command, "sb") == 0)
 			swap_a_b(b, top[1]);
-		else if (ft_strcmp(command, "ss") == 0)
-			swap_both(a, top[0], b, top[1]);
 		else if (check_rot_instr(command, a, b, top) == -1)
 		{
+			get_next_line(0, &command, 0);
 			ft_memdel((void**)&command);
-			ft_memdel((void**)&a);
-			ft_memdel((void**)&b);
+			del_int_tabs(&a, &b);
 			return (-1);
 		}
 		opt[1]++;
 		ft_memdel((void**)&command);
 	}
-	return (0);
+	if (get_next_line(0, &command, 0) == 1 || ret == -1)
+		del_int_tabs(&a, &b);
+	return (ret);
 }
 
 int			main(int argc, char **argv)
@@ -116,9 +118,9 @@ int			main(int argc, char **argv)
 	size_t	opt[2];
 	size_t	top[2];
 
-	if (argc == 1 || handle_opt(&argc, &argv, opt) == -1)
-		return ((int)write(2, "Error\n", 6));
-	if (check_integers(argc, argv) == -1)
+	if (argc == 1)
+		return (0);
+	if (handle_opt(&argc, &argv, opt) == -1 || check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
 	if (malloc_tabs(&a, &b, top, argc) == -1)
 		return (-1);

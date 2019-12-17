@@ -6,12 +6,11 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 18:53:51 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/15 15:04:13 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:02:34 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include <string.h>
 
 /*
 ** This file contains the functions to execute the following commands:

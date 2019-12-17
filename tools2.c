@@ -6,12 +6,23 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:19:28 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/10 18:10:02 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/18 13:27:35 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
+#include "libft/libft.h"
+
+/*
+** This function will be used as part of run_algo within checker programm
+** It's purpose is to ft_memdel the tab of ints in case of problem
+*/
+
+void		del_int_tabs(int **a, int **b)
+{
+	ft_memdel((void**)a);
+	ft_memdel((void**)b);
+}
 
 /*
 ** Function used to execute both RRA and RRB

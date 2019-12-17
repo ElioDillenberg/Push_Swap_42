@@ -6,11 +6,10 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 18:01:52 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/12 15:59:56 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/17 16:53:44 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft/libft.h"
 #include "push_swap.h"
 

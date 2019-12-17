@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 15:21:07 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/13 17:09:12 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/18 12:02:31 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int		main(int argc, char **argv)
 	int		*b;
 	size_t	top[2];
 
-	if (argc == 1 || check_integers(argc, argv) == -1)
+	if (argc == 1)
+		return (0);
+	if (check_integers(argc, argv) == -1)
 		return ((int)write(2, "Error\n", 6));
 	if (malloc_tabs(&a, &b, top, argc) == -1)
 		return (-1);

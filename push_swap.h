@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 10:43:00 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/15 16:24:50 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/18 13:27:12 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				rev_rotate_a_b(int *a_b, size_t top);
 int				rev_rotate_both(int *a, size_t top_a, int *b, size_t top_b);
 void			cpy_stru(t_target *src, t_target *dst);
 void			get_rot_instr(size_t *top, size_t a, size_t b, t_target *cr);
+void			del_int_tabs(int **a, int **b);
 
 int				algo(int *a, int *b, size_t *top);
 
@@ -58,6 +59,4 @@ void			less_than_four(int *a, size_t *top);
 int				check_dbl(int *a, int *b, size_t top_a);
 int				check_integers(int argc, char **argv);
 int				check_arr(int *a, size_t top_a, size_t top_b);
-
-void			visualizer(int *a, int *b, size_t *top);
 #endif

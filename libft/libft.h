@@ -6,7 +6,7 @@
 /*   By: edillenb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 18:39:30 by edillenb          #+#    #+#             */
-/*   Updated: 2019/07/11 19:43:55 by edillenb         ###   ########.fr       */
+/*   Updated: 2019/07/18 12:18:57 by edillenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void			ft_lstputstr(t_list **alst);
 size_t			ft_lstlen(t_list **alst);
 void			ft_putstrclr(const char *s, const char *color_input);
 int				get_next_line_multi(const int fd, char **line);
-int				get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line, int opt);
 char			*ft_bitoa(void *input, size_t size);
 void			*ft_free_stropt(char **s1, char **s2, char option);
 char			*ft_str_add(char **s1, char **s2, char option);
