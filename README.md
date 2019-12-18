@@ -1,5 +1,4 @@
 # push_swap
-push_swap project for school 42
 
 Push_Swap aims to introduce students to sorting algorithms. It requires you to sort data on a stack with the use of a second stack and a limited set of instructions. 
 
@@ -17,3 +16,5 @@ RRB: the last element of the B stack is pushed to the top of the B stack
 RRR: RRA and RRB simultaneously                                                                                               
 
 All elements given by the user are first placed on the A stack. Your goal is to sort the A stack (lowest value on top) using the lowest amount of instructions above.
+
+More details can be found within the official subject PDF in the subject folder.
