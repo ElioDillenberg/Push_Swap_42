@@ -18,10 +18,6 @@ RRR: RRA and RRB simultaneously
 
 All elements given by the user are first placed on the A stack. Your goal is to sort the A stack (lowest value on top) using the lowest amount of instructions above.
 
-The push_swap binary takes care of sorting the elements and prints on stdout the use instructions.
-The checker binary reads on stdin the instructions and checks wether the elements are sorted.
-More details can be found within the official subject PDF in the subject folder.
-
 # How to run:
 <pre>
 git clone https://github.com/ElioDillenberg/Push_Swap_42.git push_swap
@@ -35,3 +31,5 @@ The push_swap binary takes care of sorting the elements and prints on stdout the
 The checker binary reads on stdin the instructions and checks wether the elements are sorted.
 
 Enjoy!
+
+NB: The official project subject can be found as PDF in the subject folder.
