@@ -1,4 +1,4 @@
-# push_swap
+# Push_Swap (42 School Project)
 
 Push_Swap aims to introduce students to sorting algorithms. It requires you to sort data on a stack with the use of a second stack and a limited set of instructions. 
 
