@@ -5,9 +5,9 @@ Push_Swap aims to introduce students to sorting algorithms. It requires you to s
 
 Set of available instructions:
 
-PA: push the top element from the B stack on top of the A stack
-PB: push the top element from the A sack on top of the B stack
-SA: swap the top two element from the A stack
+PA: push the top element from the B stack on top of the A stack\n
+PB: push the top element from the A sack on top of the B stack\n
+SA: swap the top two element from the A stack\n
 SB: swap the top two element from the B stack
 RA: the first element of the A stack is pushed to the bottom of the A stack
 RB: the first element of the B stack is pushed to the bottom of the B stack
